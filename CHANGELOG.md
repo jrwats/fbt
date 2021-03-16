@@ -9,10 +9,13 @@ List of changes for each released npm package version.
 - [babel-plugin-fbt-runtime versions](#babel-plugin-fbt-runtime-versions)
 - [fb-tiger-hash versions](#fb-tiger-hash-versions)
 - [fb-babel-plugin-utils versions](#fb-babel-plugin-utils-versions)
+- [gulp-rewrite-flowtyped-modules](#gulp-rewrite-flowtyped-modules)
 - [react-native-fbt versions](#react-native-fbt-versions)
 - [fbt-rn-android-native versions [Deprecated]](#fbt-rn-android-native-versions-deprecated)
 
 ### Top-level Github
+- [feat] Add example of fbt common to the demo-app. See `<fbt common={true}>...</fbt>`.
+- [chore] Upgrade to Flow v0.141.0
 - [chore] Use GitHub Actions for Continuous Integration
 - [chore] Upgrade to Flow v0.137.0
 - [chore] Adding @noflow annotations
@@ -47,10 +50,17 @@ List of changes for each released npm package version.
   </summary>
 </details>
 
+- 0.16.2:
+  - [chore] Update babel-plugin-fbt dependency version to `^0.17.x`
+  - [fix] Don't strip punctuation that isn't redundant with token punctuation
+
+- 0.16.1:
+  - [fix] Updated peer dependencies, and devEngines dependencies.
+  - [fix] Improved Flow typing of `intlList`
 - 0.16.0:
   - [major] Merge two `GenderConst` entries that had the same value to avoid confusion. <br/>
     I.e. `MIXED_SINGULAR` and `MIXED_PLURAL` will both be referred as `MIXED_UNKNOWN` and it'll keep the same value (`MIXED_UNKNOWN=5`).
-  - [feat] Add Babel `presets` as a CLI option for [`collectFBT.js`](https://github.com/facebook/fbt/blob/master/packages/babel-plugin-fbt/bin/collectFBT.js)
+  - [feat] Add Babel `presets` as a CLI option for [`collectFBT.js`](https://github.com/facebook/fbt/blob/c6201e9b463685a942563adaa62569430d41aa27/packages/babel-plugin-fbt/bin/collectFBT.js)
   - [feat] Add ES6 imports/exports support for shared enums. See [related doc.](https://facebook.github.io/fbt/docs/enums#es6-import-export-syntax)
 
 - 0.15.0:
@@ -112,12 +122,27 @@ List of changes for each released npm package version.
       Unreleased changes that have landed in master. Click to see more.
     </summary>
 
+    - [feat] Add ability to collect strings from a custom `FbtCollector` module for collection script
+  </details>
+
+- 0.17.2:
+  - [feat] Add external `transform` option for collection script
+  - [fix] Add missing flow types for `yargs` npm module
+
+- 0.17.1:
+  - [chore] Additional flow typing in scripts
+
+- 0.17.0:
+  - [chore!] `collectFBT` renamed to `collectFbt` (BREAKING CHANGE: updates paths to binary)
+  - [minor!] Add ability to write Flow annotations in JS code directly.
+      Npm packages will contain both ES5 and Flow JS file versions.
+      Source files have been moved to a `src` folder and their ES5-transpiled versions
+      will be published inside the `dist` folder. (BREAKING CHANGE: updates paths to source files)
   - [chore] Adding @noflow annotations
   - [fix] Fix issue where the value of the `human` option of `fbt:pronoun` was processed incorrectly. Before, `human=true` used to behave as if `human=false`, and vice versa.
       Also, when `fbt:pronoun` is used without an explicit `human=false` option, we'll now generate the `NOT_A_PERSON` gender-case.
   - [fix] Fix incorrect object detection algorithm of `objMap()` in `FbtUtil.js`
   - [chore] Remove dead code
-  </details>
 
 - 0.16.0:
   - [major] Merge two `GenderConst` entries that had the same value to avoid confusion. <br/>
@@ -198,6 +223,12 @@ List of changes for each released npm package version.
 
 ### babel-plugin-fbt-runtime versions
 
+- 0.9.14:
+  - [fix] Updated peer dependency on babel-plugin-fbt
+
+- 0.9.13:
+  - [fix] Updated peer dependencies
+
 - 0.9.12:
   - [fix] Relax required version patterns of npm dependencies
 
@@ -256,9 +287,10 @@ List of changes for each released npm package version.
      Unreleased changes that have landed in master. Click to see more.
     </summary>
 
-  - [chore] Adding @noflow annotations
-
   </details>
+
+- 0.11.1:
+  - [chore] Adding @noflow annotations
 
 - 0.11.0:
   - [feat] Add ability to test against Jest code snapshots
@@ -276,6 +308,11 @@ List of changes for each released npm package version.
   - Add READMEs and improve repository link in package.json
 
 - 0.9.0:
+  - Initial commit
+
+### gulp-rewrite-flowtyped-modules
+
+- 0.0.9:
   - Initial commit
 
 ### react-native-fbt versions

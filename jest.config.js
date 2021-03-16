@@ -3,6 +3,7 @@
  *
  * @format
  * @noflow
+ * @emails oncall+internationalization
  */
 
 const fs = require('fs');
@@ -16,6 +17,7 @@ const runtimePaths = [
 
 const globalConfig = {
   setupFiles: ['fbjs-scripts/jest/environment.js'],
+  testMatch: ['**/__tests__/**/*-test.js'],
   timers: 'fake',
   transform: {
     '\\.js$': '<rootDir>/jest-preprocessor.js',
@@ -30,7 +32,11 @@ module.exports = {
   projects: [
     {
       displayName: 'babel-plugin-fbt',
-      roots: [fs.realpathSync(path.resolve('packages', 'babel-plugin-fbt'))],
+      roots: [
+        fs.realpathSync(path.resolve('packages', 'babel-plugin-fbt', 'dist')),
+      ],
+      snapshotResolver:
+        '<rootDir>/packages/babel-plugin-fbt/jest.snapshotResolver.js',
     },
     {
       displayName: 'babel-plugin-fbt-runtime',
@@ -39,9 +45,29 @@ module.exports = {
       ],
     },
     {
+      displayName: 'fbt-runtime',
+      roots: [fs.realpathSync(path.resolve('packages', 'fbt', 'lib'))],
+      modulePaths: [fs.realpathSync(path.resolve('packages', 'fbt', 'lib'))],
+    },
+    {
+      displayName: 'gulp-rewrite-flowtyped-modules',
+      roots: [
+        fs.realpathSync(
+          path.resolve('packages', 'gulp-rewrite-flowtyped-modules'),
+        ),
+      ],
+    },
+    {
+      displayName: 'gulp-strip-docblock-pragmas',
+      roots: [
+        fs.realpathSync(
+          path.resolve('packages', 'gulp-strip-docblock-pragmas'),
+        ),
+      ],
+    },
+    {
       displayName: 'fb-tiger-hash',
       roots: [fs.realpathSync(path.resolve('packages', 'fb-tiger-hash'))],
-      testRegex: '/__tests__/.*\\.js$',
       transform: {
         '\\.js$': [
           '<rootDir>/jest-preprocessor.js',
@@ -76,7 +102,13 @@ module.exports = {
             plugins: [
               [
                 'babel-plugin-fbt',
-                {fbtEnumPath: path.resolve('demo-app', '.enum_manifest.json')},
+                {
+                  fbtCommonPath: path.resolve(
+                    'demo-app',
+                    'common_strings.json',
+                  ),
+                  fbtEnumPath: path.resolve('demo-app', '.enum_manifest.json'),
+                },
               ],
               'babel-plugin-fbt-runtime',
             ],

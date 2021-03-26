@@ -7,6 +7,7 @@ List of changes for each released npm package version.
 - [fbt versions](#fbt-versions)
 - [babel-plugin-fbt versions](#babel-plugin-fbt-versions)
 - [babel-plugin-fbt-runtime versions](#babel-plugin-fbt-runtime-versions)
+- [@fbtjs/default-collection-transform](#default-collection-transform)
 - [fb-tiger-hash versions](#fb-tiger-hash-versions)
 - [fb-babel-plugin-utils versions](#fb-babel-plugin-utils-versions)
 - [gulp-rewrite-flowtyped-modules](#gulp-rewrite-flowtyped-modules)
@@ -14,6 +15,8 @@ List of changes for each released npm package version.
 - [fbt-rn-android-native versions [Deprecated]](#fbt-rn-android-native-versions-deprecated)
 
 ### Top-level Github
+- [fix] Add missing dependencies for `@babel/preset-react`
+- [build] Add test to ensure published versions are in sync
 - [feat] Add example of fbt common to the demo-app. See `<fbt common={true}>...</fbt>`.
 - [chore] Upgrade to Flow v0.141.0
 - [chore] Use GitHub Actions for Continuous Integration
@@ -49,6 +52,15 @@ List of changes for each released npm package version.
     Unreleased changes that have landed in master. Click to see more.
   </summary>
 </details>
+
+- 0.16.5:
+  - [chore] Update babel-plugin-fbt dependency version to `^0.20.x`
+
+- 0.16.4:
+  - [chore] Update babel-plugin-fbt dependency version to `^0.19.x`
+
+- 0.16.3:
+  - [chore] Update babel-plugin-fbt dependency version to `^0.18.x`
 
 - 0.16.2:
   - [chore] Update babel-plugin-fbt dependency version to `^0.17.x`
@@ -122,8 +134,24 @@ List of changes for each released npm package version.
       Unreleased changes that have landed in master. Click to see more.
     </summary>
 
-    - [feat] Add ability to collect strings from a custom `FbtCollector` module for collection script
   </details>
+
+- 0.20.0:
+  - [refactor] Hang FbtUtil modules off of babel-plugin-fbt
+  - [refactor]! Replace `fbtBabelPluginPath` with actual referenct to `fbtModule` in external transform
+
+- 0.19.2:
+  - [chore] Update devDependency of `gulp-strip-docblock-pragmas`
+
+- 0.19.1:
+  - [chore] Update fb-babel-plugin-utils dependency version
+
+- 0.19.0:
+  - [refactor]! Move to @fbtjs/default-collection-transform and avoid fb-babel-plugin-utils/SyntaxPlugins
+
+- 0.18.0:
+  - [fix] Ignore __private JSX attributes when parsing
+  - [feat] Add ability to collect strings from a custom `FbtCollector` module for collection script
 
 - 0.17.2:
   - [feat] Add external `transform` option for collection script
@@ -223,6 +251,18 @@ List of changes for each released npm package version.
 
 ### babel-plugin-fbt-runtime versions
 
+- 0.9.18:
+  - [chore] Updated peer dependency on babel-plugin-fbt
+
+- 0.9.17:
+  - [chore] Updated devDependency on fb-babel-plugin-utils
+
+- 0.9.16:
+  - [chore] Updated peer dependency on babel-plugin-fbt
+
+- 0.9.15:
+  - [chore] Updated peer dependency on babel-plugin-fbt
+
 - 0.9.14:
   - [fix] Updated peer dependency on babel-plugin-fbt
 
@@ -281,13 +321,31 @@ List of changes for each released npm package version.
 - 0.1.0:
   -  First commit. A native JavaScript implementation of the Tiger hash Algorithm.
 
+### default-collection-transform versions
+- 0.0.3:
+  - Update peer dependency on babel-plugin-fbt
+  - Pass `{enum: true}` to '@babel/plugin-syntax-flow'
+
+- 0.0.2:
+  - Require Babel plugins directly
+
+- 0.0.1:
+  - First commit.  A default Babel transform to use for fbt collection.
+
 ### fb-babel-plugin-utils versions
   <details>
     <summary>
      Unreleased changes that have landed in master. Click to see more.
     </summary>
 
+  - [refactor!] Remove SyntaxPlugins
+  - [chore] Remove SyntaxPluginsConfig
+
   </details>
+
+- 0.12.0:
+  - [refactor!] Remove SyntaxPlugins
+  - [chore] Remove SyntaxPluginsConfig
 
 - 0.11.1:
   - [chore] Adding @noflow annotations

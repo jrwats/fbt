@@ -14,8 +14,6 @@
 const {extractEnumsAndFlattenPhrases} = require('../FbtShiftEnums');
 // eslint-disable-next-line fb-www/no-module-aliasing
 const fbt = require('../index');
-const babel = require('@babel/core');
-const {SyntaxPlugins} = require('fb-babel-plugin-utils');
 const fs = require('graceful-fs');
 const path = require('path');
 
@@ -23,7 +21,7 @@ export type ExternalTransform = (src: string, opts: TransformOptions, filename: 
 
 /*::
 import type {BabelPluginList, BabelPresetList} from '@babel/core';
-import type {Phrase} from '../index';
+import type {BabelPluginFbt, Phrase} from '../index';
 export type CollectorConfig = {|
   auxiliaryTexts: boolean,
   fbtCommonPath?: string,
@@ -45,7 +43,7 @@ export type PackagerPhrase = {|
 export type TransformOptions = {|
   collectFbt?: boolean,
   soureType?: string,
-  fbtBabelPluginPath?: string,
+  fbtModule?: BabelPluginFbt,
   filename?: string,
   extraOptions?: mixed,
   fbtEnumManifest?: FbtEnumManifest,
@@ -54,24 +52,6 @@ export type TransformOptions = {|
   reactNativeMode?: boolean,
 |}
 */
-
-function transform(
-  code /*: string*/,
-  options /*: TransformOptions*/,
-  plugins /*: BabelPluginList */,
-  presets  /*: BabelPresetList */
-)/*: void*/ {
-  const opts = {
-    ast: false,
-    code: false,
-    filename: options.filename,
-    plugins: SyntaxPlugins.list.concat(plugins, [[fbt, options]]),
-    presets,
-    sourceType: 'unambiguous',
-  };
-  babel.transformSync(code, opts);
-}
-
 
 export interface IFbtCollector {
   constructor(config : CollectorConfig, extraOptions : ExtraOptions): void;
@@ -115,6 +95,7 @@ class FbtCollector implements IFbtCollector {
       auxiliaryTexts: this._config.auxiliaryTexts,
       reactNativeMode: this._config.reactNativeMode,
       fbtCommonPath: this._config.fbtCommonPath,
+      fbtModule: fbt,
     };
     if (filename != null) {
       options.filename = filename;
@@ -126,9 +107,9 @@ class FbtCollector implements IFbtCollector {
 
     const externalTransform = this._config.transform;
     if (externalTransform) {
-      options.fbtBabelPluginPath = path.join(__dirname, '../..');
       externalTransform(source, options, filename);
     } else {
+      const transform = require('@fbtjs/default-collection-transform');
       transform(source, options, this._config.plugins || [], this._config.presets || []);
     }
 

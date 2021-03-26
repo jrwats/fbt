@@ -23,6 +23,7 @@
     "@babel/plugin-syntax-optional-chaining": "^7.2.0",
     "@babel/plugin-transform-flow-strip-types": "^7.2.0",
     "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "@cnakazawa/watch": "^1.0.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-preset-fbjs": "^3.1.2",
@@ -46,6 +47,7 @@
     "jest-docblock": "^22.2.0",
     "prettier": "^2.0.5",
     "react-dom": "^16.10.2",
+    "semver": "^7.3.5",
     "webpack": "^5.4.0",
     "webpack-stream": "^5.2.1"
   },
@@ -84,6 +86,7 @@
     "demo-app",
     "packages/babel-plugin-fbt-runtime",
     "packages/babel-plugin-fbt",
+    "packages/default-collection-transform",
     "packages/fb-babel-plugin-utils",
     "packages/fb-tiger-hash",
     "packages/fbt",
